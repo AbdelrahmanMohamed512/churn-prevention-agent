@@ -1,0 +1,18 @@
+# Phase 4 — everything the agent needs on this computer.
+# Install with:  pip install -r agent/requirements.txt
+
+# Talks to the language model running locally via Ollama.
+ollama
+
+# Loads the saved model file and prepares a customer the same way
+# the model was trained. These must be here even though we do no
+# training locally — unpickling a model needs the same libraries
+# that built it.
+scikit-learn
+pandas
+numpy
+joblib
+
+# The chat window in Step 7. Not needed until then, but installing
+# it now means one setup step instead of two.
+streamlit

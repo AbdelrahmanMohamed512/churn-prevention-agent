@@ -1,0 +1,198 @@
+{
+  "_about": {
+    "purpose": "The retention offers the agent may propose. The agent reads this file, matches a customer against the conditions, and picks the offer aimed at that customer's specific reason for leaving.",
+    "market": "Egyptian retail bank. The dataset's 'iscore' column matches I-Score, Egypt's credit bureau (range ~400-850), and salaries run 2,000-69,790 EGP per month. Offer types below are drawn from what Egyptian banks actually run (CIB, NBK) plus standard international card-retention practice.",
+    "cost_warning": "Every cost_egp figure is a PLACEHOLDER. The bank sets these. They are here so the arithmetic runs end to end, not because we know them.",
+    "condition_language": "Conditions are written against the dataset's own columns so the agent can evaluate them without guessing.",
+    "last_updated": "2026-08-16"
+  },
+
+  "offers": [
+    {
+      "id": "fee_waiver_full",
+      "name": "Annual fee waived for one year",
+      "what_it_is": "The card's yearly fee is dropped entirely for the next twelve months.",
+      "addresses": "The customer does not use the card enough to justify paying for it.",
+      "churner_type": "drifting",
+      "cost_egp": 600,
+      "cost_note": "The fee we give up. Replace with the real annual fee.",
+      "conditions": {
+        "recent_purchases_below": 900,
+        "purchase_slope_below": 0
+      },
+      "why_these_conditions": "Only worth offering to someone whose spending is small and falling. A heavy spender is not leaving over the fee.",
+      "evidence": "Fee waivers are the single most common retention offer across major issuers, and the most likely to be accepted."
+    },
+    {
+      "id": "fee_waiver_half",
+      "name": "Annual fee reduced by half",
+      "what_it_is": "Half the yearly fee, for the next twelve months.",
+      "addresses": "Same as the full waiver, where the customer is worth keeping but not worth the full giveaway.",
+      "churner_type": "drifting",
+      "cost_egp": 300,
+      "cost_note": "Half the annual fee.",
+      "conditions": {
+        "recent_purchases_below": 1500,
+        "purchase_slope_below": 0
+      },
+      "why_these_conditions": "The cheaper first move. Escalate to the full waiver only if this is refused."
+    },
+    {
+      "id": "rate_reduction",
+      "name": "Lower interest rate on the carried balance",
+      "what_it_is": "The interest charged on unpaid balance is cut for six months.",
+      "addresses": "The customer is struggling with what the card costs them each month.",
+      "churner_type": "distressed",
+      "cost_egp": null,
+      "cost_note": "Not a fixed cost. It is interest given up: carried_balance x rate_cut x 0.5 years. The agent computes it.",
+      "conditions": {
+        "payment_ratio_below": 0.8,
+        "missed_loan_payment_ever": 1
+      },
+      "why_these_conditions": "payment_ratio below 0.8 means they repay less than 80 of every 100 they spend, so they are carrying real debt. A missed loan payment confirms pressure rather than preference.",
+      "evidence": "Every customer in this dataset repays less than they spend. The median carries about 2,149 EGP a year. Interest is the largest revenue line on this book, which is exactly why cutting it is expensive and must be targeted."
+    },
+    {
+      "id": "balance_to_instalments",
+      "name": "Convert the balance to 0% instalments",
+      "what_it_is": "The outstanding balance is turned into fixed monthly instalments over 6 to 12 months at no interest.",
+      "addresses": "The customer is trapped by a balance they cannot clear and wants out of the card to escape it.",
+      "churner_type": "distressed",
+      "cost_egp": null,
+      "cost_note": "Interest given up over the instalment period.",
+      "conditions": {
+        "payment_ratio_below": 0.75,
+        "outstanding_loan_balance_above": 0
+      },
+      "why_these_conditions": "The heaviest revolvers, who also carry a loan. Closing the card does not clear the balance, so the real problem is the monthly burden.",
+      "evidence": "0% instalment plans up to 24 months are a standard Egyptian card feature, run by CIB and NBK across large merchant networks. Offering one on the existing balance is a natural extension."
+    },
+    {
+      "id": "salary_transfer_bonus",
+      "name": "Cash bonus for moving the salary to us",
+      "what_it_is": "A one-off payment when the customer's salary starts arriving in their account here.",
+      "addresses": "We are a side account, not their main bank.",
+      "churner_type": "drifting",
+      "cost_egp": 1000,
+      "cost_note": "One-off bonus. Set by the bank.",
+      "conditions": {
+        "salary_lands_in_bank": 0
+      },
+      "why_these_conditions": "Only offerable to someone whose salary lands elsewhere. For everyone else it is meaningless.",
+      "evidence": "The strongest actionable finding in the whole analysis. Customers whose salary is paid elsewhere close at 29 per 100. Customers whose salary lands with us close at 13. Every other strong signal describes a situation the bank cannot change; this one names something to actually do."
+    },
+    {
+      "id": "spend_target_credit",
+      "name": "Statement credit for hitting a spending target",
+      "what_it_is": "Spend a set amount over three months and receive a credit on the statement.",
+      "addresses": "The customer has drifted out of the habit of reaching for this card.",
+      "churner_type": "drifting",
+      "cost_egp": 400,
+      "cost_note": "The credit itself, paid only if the target is met.",
+      "conditions": {
+        "purchase_slope_below": -20,
+        "payment_ratio_above": 0.85,
+        "missed_loan_payment_ever": 0
+      },
+      "why_these_conditions": "Falling spending, but a clean payment record and no sign of financial pressure. This is disengagement, not distress. Asking a struggling customer to spend more would be the wrong offer and possibly a harmful one.",
+      "evidence": "Bonus points or statement credits tied to a spending requirement are one of the three standard retention levers used by major issuers."
+    },
+    {
+      "id": "category_cashback",
+      "name": "Boosted cashback in one category for three months",
+      "what_it_is": "A higher cashback rate on a category the customer already uses, such as groceries, fuel or online shopping.",
+      "addresses": "The card has no particular reason to be the one they pull out.",
+      "churner_type": "drifting",
+      "cost_egp": null,
+      "cost_note": "Roughly extra_rate x expected spend in that category over three months.",
+      "conditions": {
+        "purchase_slope_below": 0,
+        "recent_purchases_above": 1200,
+        "has_other_credit_cards": 1
+      },
+      "why_these_conditions": "Aimed at a customer who still spends real money but is splitting it with a rival card. The point is to win back share, not to rescue anyone.",
+      "evidence": "Category cashback is a core Egyptian card feature — CIB's cashback and talabat cards run up to 25% in specific categories."
+    },
+    {
+      "id": "merchant_instalment_access",
+      "name": "0% instalments at partner merchants",
+      "what_it_is": "Access to interest-free instalment plans of 6 to 24 months at the bank's partner shops.",
+      "addresses": "The card offers nothing the customer's other card does not.",
+      "churner_type": "drifting",
+      "cost_egp": 250,
+      "cost_note": "The subsidised interest, usually shared with the merchant.",
+      "conditions": {
+        "has_other_credit_cards": 1,
+        "recent_purchases_above": 800
+      },
+      "why_these_conditions": "A competitive feature rather than a giveaway, so it is cheap to offer widely.",
+      "evidence": "The most heavily marketed card benefit in the Egyptian market. CIB and NBK both run 0% plans up to 24 months across furniture, electronics and appliance retailers."
+    },
+    {
+      "id": "limit_increase",
+      "name": "Credit limit increase",
+      "what_it_is": "A higher spending limit on the card.",
+      "addresses": "The card is too small to be useful, so the customer uses another one for anything large.",
+      "churner_type": "drifting",
+      "cost_egp": 0,
+      "cost_note": "No direct cost, but it increases the bank's exposure. Needs credit approval, not a marketing decision.",
+      "conditions": {
+        "iscore_above": 700,
+        "missed_loan_payment_ever": 0,
+        "spend_to_salary_above": 0.25
+      },
+      "why_these_conditions": "Only for customers with a strong credit record who are already pushing a large share of their income through the card. Offering more credit to someone under pressure would be irresponsible.",
+      "caution": "The dataset has no credit limit column, so utilisation cannot be calculated. spend_to_salary is a stand-in. This offer needs the real limit before it can be used properly."
+    },
+    {
+      "id": "supplementary_cards",
+      "name": "Free supplementary cards for the family",
+      "what_it_is": "Additional cards for family members at no charge.",
+      "addresses": "The card is a personal item rather than something the household depends on.",
+      "churner_type": "drifting",
+      "cost_egp": 150,
+      "cost_note": "Issuing cost per extra card.",
+      "conditions": {
+        "responsibility_above": 0
+      },
+      "why_these_conditions": "Only relevant to a married customer or one with dependants.",
+      "evidence": "Out of 100 customers, 29 single with no children close their card against 16 married with children. Household commitments hold a card in place, and this offer deliberately creates more of them. CIB issues up to four free supplementary cards."
+    },
+    {
+      "id": "loyalty_points_multiplier",
+      "name": "Double points for six months",
+      "what_it_is": "Every purchase earns twice the usual reward points.",
+      "addresses": "A long-standing customer who has quietly stopped feeling valued.",
+      "churner_type": "drifting",
+      "cost_egp": 350,
+      "cost_note": "Cost of the extra points, only earned on actual spending.",
+      "conditions": {
+        "loyalty_years_above": 5,
+        "purchase_slope_below": 0
+      },
+      "why_these_conditions": "Tenure is the qualifier. Cheap to offer because it costs nothing unless the customer spends.",
+      "evidence": "Bonus points are one of the three standard retention levers. Issuers weight offers by tenure and spending history."
+    },
+    {
+      "id": "monitor_only",
+      "name": "No offer — monitor only",
+      "what_it_is": "Do nothing this cycle. Re-check the customer next month.",
+      "addresses": "The customer is flagged, but spending money on them cannot be justified.",
+      "churner_type": "either",
+      "cost_egp": 0,
+      "cost_note": "Free. This is the point of it.",
+      "conditions": {
+        "annual_value_below": 800
+      },
+      "why_these_conditions": "If a customer generates less value in a year than the offer costs, a retention offer loses money even when it works perfectly.",
+      "note": "This must stay in the list. An agent that always has something to give will always give something. The most common correct answer in a retention programme is 'not this one'."
+    }
+  ],
+
+  "escalation_rule": {
+    "description": "Where more than one offer fits, propose the cheapest that addresses the customer's actual reason. Hold the expensive ones back.",
+    "order": ["monitor_only", "limit_increase", "supplementary_cards", "merchant_instalment_access",
+              "category_cashback", "fee_waiver_half", "loyalty_points_multiplier", "spend_target_credit",
+              "fee_waiver_full", "balance_to_instalments", "rate_reduction", "salary_transfer_bonus"]
+  }
+}

@@ -1,0 +1,185 @@
+{
+  "_provenance": {
+    "MEASURED": "AUC, churn-class F1, threshold, caught/missed counts, and every table below are recorded in docs/EXPERIMENT_LOG.md from five-fold cross-validation across all 8,500 customers.",
+    "DERIVED": "precision, false positives, true negatives and accuracy are ARITHMETICALLY DERIVED from the recorded F1 and the recorded caught/missed counts. They were never printed during the project.",
+    "NOT_RECORDED": "Accuracy was deliberately never used as a judging metric - always predicting 'stays' scores 80% and catches nobody. The derived figure below is for completeness only."
+  },
+  "headline_measured": {
+    "model": "Logistic regression in a pipeline (build features -> clip 1st/99th -> scale)",
+    "validation": "5-fold cross-validation, all 8,500 customers",
+    "ROC_AUC": 0.8069,
+    "F1_churn_class": 0.5509,
+    "decision_threshold": 0.255,
+    "churners_caught": 1098,
+    "churners_missed": 599
+  },
+  "derived_from_the_above": {
+    "recall": 0.647,
+    "precision": 0.4796,
+    "true_positives": 1098,
+    "false_negatives": 599,
+    "false_positives": 1191,
+    "true_negatives": 5612,
+    "total_flagged": 2289,
+    "accuracy": 0.7894
+  },
+  "model_comparison_measured": [
+    {
+      "model": "Logistic regression",
+      "AUC": 0.8085,
+      "note": "LazyPredict survey, single split"
+    },
+    {
+      "model": "Calibrated classifier",
+      "AUC": 0.8066,
+      "note": "survey"
+    },
+    {
+      "model": "Linear SVC",
+      "AUC": 0.8065,
+      "note": "survey"
+    },
+    {
+      "model": "Linear discriminant",
+      "AUC": 0.8049,
+      "note": "survey"
+    },
+    {
+      "model": "Nearest centroid",
+      "AUC": 0.7953,
+      "note": "survey"
+    },
+    {
+      "model": "Random forest",
+      "AUC": 0.7911,
+      "note": "survey"
+    },
+    {
+      "model": "CatBoost",
+      "AUC": 0.789,
+      "note": "survey"
+    },
+    {
+      "model": "XGBoost (defaults)",
+      "AUC": 0.7467,
+      "note": "survey"
+    },
+    {
+      "model": "XGBoost (modest settings)",
+      "AUC": 0.7921,
+      "F1": 0.5236,
+      "note": "5-fold CV"
+    },
+    {
+      "model": "XGBoost (depth 6, 800 trees)",
+      "AUC": 0.7756,
+      "F1": 0.508,
+      "note": "5-fold CV, overfit"
+    },
+    {
+      "model": "CatBoost (default)",
+      "AUC": 0.7897,
+      "F1": 0.538,
+      "note": "5-fold CV"
+    },
+    {
+      "model": "XGBoost (tuned, random search)",
+      "AUC": 0.8052,
+      "F1": 0.5436,
+      "note": "5-fold CV"
+    },
+    {
+      "model": "Logistic (plain, untuned)",
+      "AUC": 0.8002,
+      "F1": 0.5434,
+      "note": "5-fold CV"
+    },
+    {
+      "model": "Logistic (tuned + interactions + clipping) \u2014 CHOSEN",
+      "AUC": 0.8069,
+      "F1": 0.5509,
+      "note": "5-fold CV"
+    }
+  ],
+  "feature_coefficients_measured": {
+    "_note": "Absolute standardised coefficients of the final logistic regression, recorded in docs/EXPERIMENT_LOG.md section 4.2. Only these eight were logged.",
+    "purchase_volatility": 0.361,
+    "slope_x_relationship_depth": 0.303,
+    "slope_x_purchase_volatility": 0.252,
+    "slope_x_recent_purchases": 0.251,
+    "spend_to_salary": 0.167,
+    "payment_ratio": 0.067,
+    "purchase_slope": 0.054,
+    "recent_purchases": 0.025
+  },
+  "calibration_measured": {
+    "_note": "Predicted probability vs actual closure rate, by decile.",
+    "predicted": [
+      0.021,
+      0.04,
+      0.059,
+      0.083,
+      0.112,
+      0.151,
+      0.203,
+      0.278,
+      0.392,
+      0.657
+    ],
+    "actual": [
+      0.032,
+      0.049,
+      0.056,
+      0.075,
+      0.099,
+      0.147,
+      0.178,
+      0.304,
+      0.401,
+      0.655
+    ]
+  },
+  "ceiling_test_measured": {
+    "method": "Regenerate labels from the model's own predicted probabilities, then re-score.",
+    "AUC_against_regenerated_labels": 0.8074,
+    "sd_over_20_runs": 0.0069,
+    "AUC_observed": 0.8069,
+    "conclusion": "They match. The model has recovered the process that generated the data. Ceiling is AUC about 0.807, F1 about 0.55."
+  },
+  "learning_curve_measured": {
+    "train_sizes": [
+      1360,
+      2720,
+      4080,
+      5440,
+      6800
+    ],
+    "AUC": [
+      0.759,
+      0.765,
+      0.782,
+      0.78,
+      0.788
+    ]
+  },
+  "competition_measured": {
+    "metric": "F1 (established from the leaderboard, not the rules)",
+    "submissions": {
+      "threshold 0.50": 0.4,
+      "threshold 0.23": 0.53,
+      "all ones": 0.32,
+      "top 420 by risk": 0.53,
+      "leaderboard leader": 0.56
+    },
+    "simulation": {
+      "runs": 12,
+      "cv_F1_mean": 0.548,
+      "test_F1_mean": 0.54,
+      "test_F1_sd": 0.024,
+      "range": [
+        0.517,
+        0.591
+      ]
+    }
+  }
+}

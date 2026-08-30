@@ -1,0 +1,253 @@
+{
+  "dataset": "bank_churn_dataset.csv",
+  "rows": 8500,
+  "columns": 29,
+  "target": "churned",
+  "target_meaning": "1 = the customer closed their credit card. They remain a customer of the bank; they ended this one product.",
+  "class_balance": {
+    "stayed": 6803,
+    "closed": 1697,
+    "closure_rate_pct": 19.96
+  },
+  "month_order": "month 1 is the OLDEST month, month 6 the most recent. Confirmed with the manager.",
+  "note": "REAL CLIENT DATA IS NOT INCLUDED IN THIS PACKAGE. Only this schema and an invented 5-row sample.",
+  "columns_detail": [
+    {
+      "column": "customer_id",
+      "dtype": "int64",
+      "distinct": 8500,
+      "nulls": 0,
+      "min": 1.0,
+      "max": 8500.0
+    },
+    {
+      "column": "age",
+      "dtype": "int64",
+      "distinct": 58,
+      "nulls": 0,
+      "min": 18.0,
+      "max": 75.0
+    },
+    {
+      "column": "gender",
+      "dtype": "object",
+      "distinct": 2,
+      "nulls": 0,
+      "categories": [
+        "F",
+        "M"
+      ]
+    },
+    {
+      "column": "married",
+      "dtype": "int64",
+      "distinct": 2,
+      "nulls": 0,
+      "min": 0.0,
+      "max": 1.0
+    },
+    {
+      "column": "has_dependents",
+      "dtype": "int64",
+      "distinct": 2,
+      "nulls": 0,
+      "min": 0.0,
+      "max": 1.0
+    },
+    {
+      "column": "employment_sector",
+      "dtype": "object",
+      "distinct": 3,
+      "nulls": 0,
+      "categories": [
+        "Government",
+        "Private",
+        "Self-Employed"
+      ]
+    },
+    {
+      "column": "salary",
+      "dtype": "float64",
+      "distinct": 8428,
+      "nulls": 0,
+      "min": 2000.0,
+      "max": 69790.69
+    },
+    {
+      "column": "salary_lands_in_bank",
+      "dtype": "int64",
+      "distinct": 2,
+      "nulls": 0,
+      "min": 0.0,
+      "max": 1.0
+    },
+    {
+      "column": "loyalty_years",
+      "dtype": "float64",
+      "distinct": 241,
+      "nulls": 0,
+      "min": 0.0,
+      "max": 33.0
+    },
+    {
+      "column": "iscore",
+      "dtype": "int64",
+      "distinct": 419,
+      "nulls": 0,
+      "min": 385.0,
+      "max": 850.0
+    },
+    {
+      "column": "has_other_credit_cards",
+      "dtype": "int64",
+      "distinct": 2,
+      "nulls": 0,
+      "min": 0.0,
+      "max": 1.0
+    },
+    {
+      "column": "had_loan_ever",
+      "dtype": "int64",
+      "distinct": 2,
+      "nulls": 0,
+      "min": 0.0,
+      "max": 1.0
+    },
+    {
+      "column": "number_of_loans",
+      "dtype": "int64",
+      "distinct": 7,
+      "nulls": 0,
+      "min": 0.0,
+      "max": 6.0
+    },
+    {
+      "column": "is_paying_old_loan",
+      "dtype": "int64",
+      "distinct": 2,
+      "nulls": 0,
+      "min": 0.0,
+      "max": 1.0
+    },
+    {
+      "column": "outstanding_loan_balance",
+      "dtype": "float64",
+      "distinct": 2088,
+      "nulls": 0,
+      "min": 0.0,
+      "max": 226199.94
+    },
+    {
+      "column": "missed_loan_payment_ever",
+      "dtype": "int64",
+      "distinct": 2,
+      "nulls": 0,
+      "min": 0.0,
+      "max": 1.0
+    },
+    {
+      "column": "payment_month_1",
+      "dtype": "float64",
+      "distinct": 8351,
+      "nulls": 0,
+      "min": 99.68,
+      "max": 16145.27
+    },
+    {
+      "column": "payment_month_2",
+      "dtype": "float64",
+      "distinct": 8347,
+      "nulls": 0,
+      "min": 101.22,
+      "max": 15445.0
+    },
+    {
+      "column": "payment_month_3",
+      "dtype": "float64",
+      "distinct": 8359,
+      "nulls": 0,
+      "min": 83.49,
+      "max": 13551.19
+    },
+    {
+      "column": "payment_month_4",
+      "dtype": "float64",
+      "distinct": 8342,
+      "nulls": 0,
+      "min": 57.01,
+      "max": 16884.48
+    },
+    {
+      "column": "payment_month_5",
+      "dtype": "float64",
+      "distinct": 8361,
+      "nulls": 0,
+      "min": 38.53,
+      "max": 19066.21
+    },
+    {
+      "column": "payment_month_6",
+      "dtype": "float64",
+      "distinct": 8348,
+      "nulls": 0,
+      "min": 39.08,
+      "max": 17350.13
+    },
+    {
+      "column": "purchase_month_1",
+      "dtype": "float64",
+      "distinct": 8378,
+      "nulls": 0,
+      "min": 133.1,
+      "max": 19679.2
+    },
+    {
+      "column": "purchase_month_2",
+      "dtype": "float64",
+      "distinct": 8383,
+      "nulls": 0,
+      "min": 148.77,
+      "max": 17924.23
+    },
+    {
+      "column": "purchase_month_3",
+      "dtype": "float64",
+      "distinct": 8379,
+      "nulls": 0,
+      "min": 124.44,
+      "max": 15598.02
+    },
+    {
+      "column": "purchase_month_4",
+      "dtype": "float64",
+      "distinct": 8377,
+      "nulls": 0,
+      "min": 78.5,
+      "max": 21256.45
+    },
+    {
+      "column": "purchase_month_5",
+      "dtype": "float64",
+      "distinct": 8363,
+      "nulls": 0,
+      "min": 54.88,
+      "max": 22755.93
+    },
+    {
+      "column": "purchase_month_6",
+      "dtype": "float64",
+      "distinct": 8359,
+      "nulls": 0,
+      "min": 55.71,
+      "max": 18952.62
+    },
+    {
+      "column": "churned",
+      "dtype": "int64",
+      "distinct": 2,
+      "nulls": 0,
+      "min": 0.0,
+      "max": 1.0
+    }
+  ]
+}

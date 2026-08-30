@@ -1,0 +1,21 @@
+# Secrets - never commit
+.env
+
+# Virtual environment
+venv/
+__pycache__/
+*.pyc
+
+# Bank data - never leaves this machine
+data/raw/
+data/processed/
+
+# Trained models can be large
+models/*.joblib
+
+# Notebook clutter
+.ipynb_checkpoints/
+
+# OS
+Thumbs.db
+desktop.ini

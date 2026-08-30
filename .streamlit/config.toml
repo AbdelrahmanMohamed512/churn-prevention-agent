@@ -1,0 +1,23 @@
+# The look of the chat window.
+#
+# A retention tool for a bank should feel confident, not clinical. The first
+# version was all white and read as a hospital form. This one keeps the calm
+# rhythm but gives the page a tinted background so the white cards lift off it,
+# and lets colour carry meaning: navy for the brand, teal for money, amber for
+# the decision, red and green for risk.
+
+[theme]
+base = "light"
+
+primaryColor = "#1E2761"              # deep navy - buttons, focus rings
+backgroundColor = "#F1F4FB"           # soft blue-grey page, not white
+secondaryBackgroundColor = "#FFFFFF"  # cards and inputs sit above it
+textColor = "#141824"
+
+font = "sans-serif"
+
+[client]
+toolbarMode = "minimal"               # hide the developer menu from the employee
+
+[server]
+runOnSave = true

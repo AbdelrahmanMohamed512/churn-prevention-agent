@@ -1,0 +1,24 @@
+{
+  "// note": "Makes VS Code use this project's own Python (the venv folder) automatically.",
+  "python.defaultInterpreterPath": "${workspaceFolder}\\venv\\Scripts\\python.exe",
+  "python.terminal.activateEnvironment": true,
+  "// note2": "Run every script from the project folder, so file paths line up.",
+  "python.terminal.executeInFileDir": false,
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.ipynb_checkpoints": true,
+    "**/*.pyc": true
+  },
+  "editor.rulers": [
+    88
+  ],
+  "editor.wordWrap": "on",
+  "explorer.sortOrder": "default",
+  "python-envs.pythonProjects": [
+    {
+      "path": ".",
+      "envManager": "ms-python.python:venv",
+      "packageManager": "ms-python.python:pip"
+    }
+  ]
+}

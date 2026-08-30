@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "THE AGENT \u2014 (use a terminal instead: python agent\\agent.py)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/agent/agent.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "justMyCode": true,
+      "noDebug": true
+    },
+    {
+      "name": "The tool \u2014 test one customer",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/agent/tool.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "justMyCode": true,
+      "noDebug": true
+    }
+  ]
+}
